@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: svc-auth
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: auth.baidu.com
+    http:
+      paths:
+      - path:
+        backend:
+          serviceName: svc-auth
+          servicePort: 8003

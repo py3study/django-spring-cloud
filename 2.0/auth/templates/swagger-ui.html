@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="swagger-ui">
+    <div id="title" style="height: 50px;background-color: #89bf04">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="row clearfix">
+                        <div class="col-md-1">
+                        </div>
+                        <div class="col-md-7">
+                            <div style="margin-top: 10px">
+                                <img src="/static/images/logo.png">
+                                <span style="font-weight:bold;font-size: 20px;color: white;margin-left: 10px">swagger</span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div style="margin-top: 10px">
+                                <label class="select-label" for="select">
+                                    <span style="font-weight:bold;">Select a spec</span>
+                                    <select id="select" style="width: 200px">
+                                        <option value="http://svc-auth.default.svc.cluster.local:8003/api-docs">default</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 60px"></div>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="row clearfix">
+                    <div class="col-md-1">
+                    </div>
+                    <div class="col-md-10">
+                        <span style="font-weight:bold;font-size: 36px">接口文档</span>
+                        <br/>
+                        <span>[ Base URL: svc-auth.default.svc.cluster.local:8003/ ]</span><br/>
+                        <a href="#">http://svc-auth.default.svc.cluster.local:8003/api-docs</a>
+                        <div style="height: 70px"></div>
+                        <div>
+                            <span style="font-weight:bold;font-size: 30px">login接口</span>
+                            <span style="margin-left: 10px;">auth Controller</span>
+                            <hr/>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

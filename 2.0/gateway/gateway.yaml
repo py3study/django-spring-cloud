@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    k8s.eip.work/displayName: gateway
+    k8s.eip.work/ingress: 'false'
+    k8s.eip.work/service: ClusterIP
+    k8s.eip.work/workload: svc-gateway
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-gateway
+  name: svc-gateway
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s.eip.work/layer: svc
+      k8s.eip.work/name: svc-gateway
+  template:
+    metadata:
+      labels:
+        k8s.eip.work/layer: svc
+        k8s.eip.work/name: svc-gateway
+    spec:
+      containers:
+        -
+          image: '192.168.31.37/library/gateway:v1'
+          imagePullPolicy: Always
+          name: gateway
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    k8s.eip.work/displayName: gateway
+    k8s.eip.work/workload: svc-gateway
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-gateway
+  name: svc-gateway
+  namespace: default
+spec:
+  ports:
+    - name: wjaz2a
+      nodePort: 0
+      port: 8000
+      protocol: TCP
+      targetPort: 8000
+  selector:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-gateway
+  type: ClusterIP
+
+

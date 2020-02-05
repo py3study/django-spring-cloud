@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    k8s.eip.work/displayName: config
+    k8s.eip.work/ingress: 'false'
+    k8s.eip.work/service: ClusterIP
+    k8s.eip.work/workload: svc-config
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-config
+  name: svc-config
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s.eip.work/layer: svc
+      k8s.eip.work/name: svc-config
+  template:
+    metadata:
+      labels:
+        k8s.eip.work/layer: svc
+        k8s.eip.work/name: svc-config
+    spec:
+      containers:
+        -
+          image: '192.168.31.37/library/config:v1'
+          imagePullPolicy: Always
+          name: config
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    k8s.eip.work/displayName: config
+    k8s.eip.work/workload: svc-config
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-config
+  name: svc-config
+  namespace: default
+spec:
+  ports:
+    - name: wjaz2a
+      nodePort: 0
+      port: 8002
+      protocol: TCP
+      targetPort: 8002
+  selector:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-config
+  type: ClusterIP
+
+

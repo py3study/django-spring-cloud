@@ -1,0 +1,8 @@
+FROM django:2.2.4
+ADD . /demo_login/
+
+EXPOSE 8000
+# 添加启动脚本
+ADD run.sh .
+RUN chmod 755 run.sh
+ENTRYPOINT [ "/run.sh"]

@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    k8s.eip.work/displayName: eureka
+    k8s.eip.work/ingress: 'false'
+    k8s.eip.work/service: ClusterIP
+    k8s.eip.work/workload: svc-eureka
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-eureka
+  name: svc-eureka
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s.eip.work/layer: svc
+      k8s.eip.work/name: svc-eureka
+  template:
+    metadata:
+      labels:
+        k8s.eip.work/layer: svc
+        k8s.eip.work/name: svc-eureka
+    spec:
+      containers:
+        -
+          image: '192.168.31.37/library/eureka:v1'
+          imagePullPolicy: Always
+          name: eureka
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    k8s.eip.work/displayName: eureka
+    k8s.eip.work/workload: svc-eureka
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-eureka
+  name: svc-eureka
+  namespace: default
+spec:
+  ports:
+    - name: wjaz2a
+      nodePort: 0
+      port: 8001
+      protocol: TCP
+      targetPort: 8001
+  selector:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-eureka
+  type: ClusterIP
+
+

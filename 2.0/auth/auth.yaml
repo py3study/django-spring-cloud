@@ -1,0 +1,58 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    k8s.eip.work/displayName: auth
+    k8s.eip.work/ingress: 'false'
+    k8s.eip.work/service: ClusterIP
+    k8s.eip.work/workload: svc-auth
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-auth
+  name: svc-auth
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s.eip.work/layer: svc
+      k8s.eip.work/name: svc-auth
+  template:
+    metadata:
+      labels:
+        k8s.eip.work/layer: svc
+        k8s.eip.work/name: svc-auth
+    spec:
+      containers:
+        -
+          image: '192.168.31.37/library/auth:v1'
+          imagePullPolicy: Always
+          name: auth
+      restartPolicy: Always
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    k8s.eip.work/displayName: auth
+    k8s.eip.work/workload: svc-auth
+  labels:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-auth
+  name: svc-auth
+  namespace: default
+spec:
+  ports:
+    - name: wjaz2a
+      nodePort: 0
+      port: 8003
+      protocol: TCP
+      targetPort: 8003
+  selector:
+    k8s.eip.work/layer: svc
+    k8s.eip.work/name: svc-auth
+  type: ClusterIP
+
+
